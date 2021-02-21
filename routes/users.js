@@ -1,8 +1,7 @@
 import express from "express"
-import { v4 as uuidv4 } from "uuid"
+import { createUser, getUsers, getUser, deleteUser, updateUser } from "../controllers/users.js"
 
 const router = express.Router()
-
 // const users = [
 //   {
 //     Name: "Kyrie Irving",
@@ -15,36 +14,13 @@ const router = express.Router()
 //     Points: 38
 //   }
 // ]
-let users = []
-
+// let users = []
 // all routes starts with /users
-router.get("/", (req, res) => {
-  res.send(users)
-})
 
-router.post("/", (req, res) => {
-  // console.log(req.body)
-  const user = req.body
-  // const userId = uuidv4()
-  // const userWithId = { ...userId, id: userId }
-  // users.push(userWithId)
-
-  users.push({ ...user, id: uuidv4() })
-  res.send(`User with the name ${user.Name} added to the database`)
-})
-
-router.get("/:id", (req, res) => {
-  const { id } = req.params
-
-  const foundUser = users.find(user => user.id === id)
-  res.send(foundUser)
-})
-
-router.delete("/:id", (req, res) => {
-  const { id } = req.params
-  users = users.filter(user => user.id !== id)
-
-  res.send(`User with the id ${id} deleted from the database`)
-})
+router.get("/", getUsers)
+router.post("/", createUser)
+router.get("/:id", getUser)
+router.delete("/:id", deleteUser)
+router.patch("/:id", updateUser)
 
 export default router
