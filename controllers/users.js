@@ -34,5 +34,5 @@ export const updateUser = (req, res) => {
   if (Team) user.Team = Team
   if (Points) user.Points = Points
 
-  res.send(`User with ${Name} has been updated`)
+  res.send(`User with the name ${Name} has been updated`)
 }
